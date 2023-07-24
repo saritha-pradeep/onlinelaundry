@@ -5,13 +5,15 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import Details from "../Screens/Details";
+import Login from "../Screens/Login";
+import SignUp from "../Screens/SignUp";
 function MainNav(params) {
   return (
     <NavigationProvider>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/details" element={<Details />} />
+      <Route path="/" element={<Home/>} />  
+      <Route path="/login" element={<Login/>} />
+      <Route path="/signup" element={<SignUp/>} />
       </Routes>
     </NavigationProvider>
   );
