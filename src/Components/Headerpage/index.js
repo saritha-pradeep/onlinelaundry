@@ -1,12 +1,21 @@
 import React from 'react'
 import { Link } from'react-router-dom'
-import styles from './header.css'
+import styles from './headerpage.css'
 import { AiOutlineHome } from 'react-icons/ai'
 
-const Header = () => {
+const Header2 = () => {
   return (
-    
-    <div className='header'>
+    // <div>
+    //     <ul>
+    //     <Link to="/login">
+    //        <button>login</button>
+    //       </Link>
+    //       <Link to="/signup">
+    //        <button>signin</button>
+    //       </Link>
+    //     </ul>
+    // </div>
+    <div className='header2'>
          <img
             src={require("../../assets/download-removebg-preview.png")}
             alt="logo"
@@ -17,7 +26,7 @@ const Header = () => {
             PRIME MEMBERSHIP
           </Link>
           
-          <Link className='link_txt' to="/booking">
+          <Link className='link_txt' to="/views">
             BOOKING
           </Link>
           <Link className='link_txt' to="/about">
@@ -32,11 +41,10 @@ const Header = () => {
           <Link to='/' className='link_txt'>
           <AiOutlineHome size={25} />
         </Link>
-          
         </ul>
         
     </div>
   )
 }
 
-export default Header
+export default Header2

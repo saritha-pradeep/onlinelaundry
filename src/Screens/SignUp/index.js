@@ -4,8 +4,11 @@ import {createUserWithEmailAndPassword} from 'firebase/auth'
 import { db,auth } from '../../Firebase/config'
 import { collection, addDoc } from 'firebase/firestore'
 import { useNavigate,useNavigation } from 'react-router-dom'
+import Header from "../../Components/Header";
+import Footer from "../../Components/Footer"
 import "./signup.css"
-
+import Header2 from '../../Components/Headerpage'
+import {AiFillHome} from 'react-icons/ai'
 const SignUp = () => 
 { 
     const [username,setUserName] = useState("");
@@ -38,57 +41,64 @@ const SignUp = () =>
                             setErrorMsg('')
                                 Navigate('/login');
                         })
-                        .catch((error)=>{setErrorMsg(error.message)});
                         })
                        .catch((error)=>{
-                            if(error.message == 'Firebase error: (auth/invalid-email)')
-                            {
-                                setErrorMsg('Please fill all required fields');      
-                            }
-                            if(error.message == 'Firebase error: (auth/email-already-in-use)')
-                            {
-                                setErrorMsg('User already exists');
-                            }
+                       setErrorMsg('Invalid user name or password')
                        })
                   
                     }
     
   return (
-    <div><div className= 'signup-container'>
-    <form className= 'signup-form' onSubmit={handleSubmit}>
-        <p>Create Account</p>
-      
-            <div className='success-msg'>
-            {successMsg}
-            </div>
-            {errorMsg && <>
-            <div className='error-msg'>
-                {errorMsg}
-            </div></>
-            
-            }
-        <label>Your Name</label>
-        <input onChange={(e)=>setUserName(e.target.value)} 
-          type='text' placeholder='First and last name'/>
-        <label>Your Name</label>
-        <input onChange= {(e)=>setPhonenumber(e.target.value)}
-          type="tel" placeholder= "Mobile Number" />
-        <label>Email</label>
-        <input onChange= {(e)=>setEmail(e.target.value)} 
-          type= "email" placeholder= "Enter your email" />
-        <label>Password</label>
-        <input onChange={(e) =>setPassword(e.target.value)} 
-          type="password" placeholder="Enter your password" />
-        <label>Address</label>
-        <textarea onChange={(e) => setAddress (e.target.value)} placeholder= "Enter your address"></textarea>
-        <button type= "submit">Sign up</button>
-        <div>
-     <span>Already have an account?</span>
-     <Link to='/login'>Sign In</Link>
-</div>
+    <div>
+      <Header2 />
+      <div className= 'signup-container'>
+          <form className= 'signup-form' onSubmit={handleSubmit}>
+              <h2>Create Account</h2>
+             
+                  <div className='success-msg'>
+                  {successMsg}
+                  </div>
+                  {errorMsg && <>
+                  <div className='error-msg'>
+                      {errorMsg}
+                  </div></>
+                  
+                  }
+                  <div className='form-field'>
+                    <label>Your Name</label>
+                    <input required onChange={(e)=>setUserName(e.target.value)} 
+                      type='text' placeholder='First and last name'/>
+                 </div>
+                  <div className='form-field'>
+                    <label>Phone</label>
+                    <input onChange= {(e)=>setPhonenumber(e.target.value)}
+                    type="tel" placeholder= "Mobile Number" />
+                  </div>
+                  <div className='form-field'>
+                  <label>Email</label>
+                  <input onChange= {(e)=>setEmail(e.target.value)} 
+                    type= "email" placeholder= "Enter your email" />
+                  </div>
+                  <div className='form-field'>
+                  <label>Password</label>
+                   <input onChange={(e) =>setPassword(e.target.value)} 
+                    type="password" placeholder="Enter your password" />
+                  </div>
+                  <div className='form-field'>
+                  <label>Address</label>
+                   <textarea onChange={(e) => setAddress (e.target.value)} placeholder= "Enter email address" className='address'></textarea>
+                   </div>
+                  <button type= "submit">Sign up</button>
+                  
+             
+                    <div className='bottom'>  
+                       <span>Already have an account?</span>
+                       <Link to='/login'>Sign In</Link>
+                    </div>
 
-     </form>
-</div>
+          </form>
+    </div>
+    <Footer />
 </div>
   )
 }

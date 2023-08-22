@@ -1,80 +1,94 @@
-// import React, { useEffect } from 'react'
-// import './login.style.module.css'
-// import { useNavigate } from 'react-router-dom';
-// const Login = () => {
-//   const wrapper = document.querySelector('.wrapper');
-//   const navigate=useNavigate()
+import React,{useState}from 'react'
+import {Link, Navigate} from'react-router-dom'
+import {createUserWithEmailAndPassword} from 'firebase/auth'
+import { db,auth } from '../../Firebase/config'
+import { collection, addDoc } from 'firebase/firestore'
+import { useNavigate,useNavigation } from 'react-router-dom'
+import Header from "../../Components/Header";
+import Footer from "../../Components/Footer"
+import "./login.css"
+import Header2 from '../../Components/Headerpage'
+import {AiFillHome} from 'react-icons/ai'
+const Login = () => 
+{ 
+    const [username,setUserName] = useState("");
+    const [phonenumber,setPhonenumber] = useState("");
+    const [email,setEmail] = useState("");
+    const [password,setPassword] = useState("");
+    const [address,setAddress] = useState("");
+    const [initialcartvalue,setInitialCartValue] = useState(0);
+    const Navigate = useNavigate();
+    const [errorMsg,setErrorMsg]= useState("")
+    const [successMsg,setSuccessMsg] = useState("")
 
-// const handleSignup=()=>{
-//   wrapper.classList.add('animate-signIn');
-//   wrapper.classList.remove('animate-signUp');
-//   navigate('/signup')
-// }
-// const handleSignIn=()=>{
-//   wrapper.classList.add('animate-signUp');
-//     wrapper.classList.remove('animate-signIn');
-//     navigate('/signin')
-// }
-//   return (
-//     <div>
-//     <div class="wrapper">
-//         <div class="form-wrapper sign-up">
-//             <form action="">
-//                 <h2>Sign Up</h2>
-//                 <div class="input-group">
-//                     <input type="text" required/>
-//                     <label for="">Username</label>
-//                 </div>
-//                 <div class="input-group">
-//                     <input type="email" required/>
-//                     <label for="">Email</label>
-//                 </div>
-//                 <div class="input-group">
-//                     <input type="password" required/>
-//                     <label for="">Password</label>
-//                 </div>
-//                 <button type="submit" class="btn">Sign Up</button>
-//                 <div class="sign-link">
-//                     <p>Already have an account? <a href="" onClick={handleSignIn}>Sign In</a></p>
-//                 </div>
-//             </form>
-//         </div>
-
-//         <div class="form-wrapper sign-in">
-//             <form action="">
-//                 <h2>Login</h2>
-//                 <div class="input-group">
-//                     <input type="text" required/>
-//                     <label for="">Username</label>
-//                 </div>
-//                 <div class="input-group">
-//                     <input type="password" required/>
-//                     <label for="">Password</label>
-//                 </div>
-//                 <div class="forgot-pass">
-//                     <a href="#">Forgot Password?</a>
-//                 </div>
-//                 <button type="submit" class="btn">Login</button>
-//                 <div class="sign-link">
-//                     <p>Don't have an account? <a href="#" onClick={handleSignup}>Sign Up</a></p>
-//                 </div>
-//             </form>
-//         </div>
-//     </div>
-//       </div>
-//   )
-// }
-
-// export default Login
-
-import React from 'react'
-import './login.css'
-const login = () => {
+                    const handleSubmit =(e)=>{
+                        e.preventDefault();
+                        createUserWithEmailAndPassword(auth,email,password)
+                        .then((userCredential)=>{
+                            const user = userCredential.user;
+                            const intialcartvalue = 0;
+                            console.log(user);
+                        
+                            addDoc(collection(db, "users"), {
+                                username: username, email: email, phonenumber:
+                                phonenumber, password: password, cart: initialcartvalue,address: address,uid: user.uid
+                                 }).then(()=>{
+                            setSuccessMsg('New user added successfully, You will now be  automatically redirected to login page.')
+                            setUserName('');
+                            setPhonenumber('');
+                            setEmail('');
+                            setPassword('');
+                            setErrorMsg('')
+                                Navigate('/login');
+                        })
+                        })
+                       .catch((error)=>{
+                       setErrorMsg('Invalid user name or password')
+                       })
+                  
+                    }
+    
   return (
-    <div className="f">
-      login
-      </div>
+    <div>
+      <Header2 />
+      <div className= 'signup-container'>
+          <form className= 'signup-form' onSubmit={handleSubmit}>
+              <h2>LOGIN</h2>
+             
+                  <div className='success-msg'>
+                  {successMsg}
+                  </div>
+                  {errorMsg && <>
+                  <div className='error-msg'>
+                      {errorMsg}
+                  </div></>
+                  
+                  }
+                
+                  <div className='form-field'>
+                  <label>Email</label>
+                  <input onChange= {(e)=>setEmail(e.target.value)} 
+                    type= "email" placeholder= "Enter your email" />
+                  </div>
+                  <div className='form-field'>
+                  <label>Password</label>
+                   <input onChange={(e) =>setPassword(e.target.value)} 
+                    type="password" placeholder="Enter your password" />
+                  </div>
+                  
+                  <button type= "submit">Sign up</button>
+                  
+             
+                    <div className='bottom'>  
+                       <span>Already have an account?</span>
+                       <Link to='/login'>Sign In</Link>
+                    </div>
+
+          </form>
+    </div>
+    <Footer />
+</div>
   )
 }
 
-export default login
+export default Login

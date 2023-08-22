@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Login from "../Screens/Login";
 import SignUp from "../Screens/SignUp";
+import Booking from "../Screens/Booking";
 function MainNav(params) {
   return (
     <NavigationProvider>
@@ -14,6 +15,7 @@ function MainNav(params) {
       <Route path="/" element={<Home/>} />  
       <Route path="/login" element={<Login/>} />
       <Route path="/signup" element={<SignUp/>} />
+      <Route path="/booking" element={<Booking/>} />
       </Routes>
     </NavigationProvider>
   );

@@ -1,0 +1,25 @@
+.slider_main{
+  height: 300px;
+
+}
+.slider_item{
+  display: flex;
+  justify-content: center;
+  position: relative;
+ 
+  
+}
+.slider_img{
+  object-fit: contain;
+  width: 60vw;
+  height: 40vh;
+  
+ 
+}
+.slider_item_positioned{
+  position: absolute;
+  height: 100%;
+  display: flex;
+  align-items: center;
+ 
+}
