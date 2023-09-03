@@ -1,0 +1,17 @@
+.bk-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.booking-h-icon-style{
+  margin-right: 5px;
+}
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .bh-main-container{
+  
+margin-top: 20px;
+  }
+  .bk-logo {
+    display: none;
+  }
+}

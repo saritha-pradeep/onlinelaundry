@@ -1,0 +1,25 @@
+/* src/components/SlideCard.css */
+.slide-card {
+    display: none;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .slide-card.visible {
+    display: block;
+    transform: translateX(0);
+  }
+  .loader-style-booking{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    flex: 1;
+    height: 80vh;
+    width: 100%;
+  }
+  .spinner-style-booking{
+    height: 4rem;
+    width: 4rem;
+    color: rgb(192, 83, 83);
+    
+  }

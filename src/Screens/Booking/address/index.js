@@ -1,21 +1,25 @@
-import React from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  CardBody,
-  CardTitle,
-  CardText,
-  Label,
-  Input,
-  FormGroup,
-  Button,
-} from "reactstrap";
-import "./address.css"; // Create this CSS file for styling
-import OrderSummary from "./ordersummary";
+import React, { useCallback, useEffect, useState } from "react";
+import { Container, Row, Col, Card, CardBody, Button } from "reactstrap";
+import "./styles.css"; // Create this CSS file for styling
+import OrderSummary from "../ordersummary";
+import MapComponent from "./Map";
+import { getSingleDocument } from "../../../Firebase/functions";
+import { db } from "../../../Firebase/config";
+import { collection, query } from "firebase/firestore";
+import { useDispatch } from "react-redux";
+import { alterReducer, changeSection } from "../reducer";
+const Address = ({ onNextButtonClick = () => {} }) => {
+  const [selectedShop, setSelectShop] = useState({});
+  const dispatch = useDispatch();
 
-const Address = () => {
+  const getAllshops = useCallback(async () => {
+    const _q = query(collection(db, "shops"));
+    const shopList = await getSingleDocument({ query: _q });
+    dispatch(alterReducer({ shopList }));
+  }, [dispatch]);
+  useEffect(() => {
+    getAllshops();
+  }, [getAllshops]);
   return (
     <Container className="row-card">
       <Row>
@@ -24,34 +28,11 @@ const Address = () => {
             <CardBody>
               <Container className="address-form">
                 <h3>Address</h3>
+                <h4>Find your nearby laundry shops</h4>
                 <hr className="divider" />
-                <FormGroup>
-                  <Label for="postcode">Postcode</Label>
-                  <Input type="text" id="postcode" />
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="addressLine1">Address Line 1</Label>
-                  <Input type="text" id="addressLine1" />
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="addressLine2">Address Line 2</Label>
-                  <Input type="text" id="addressLine2" />
-                </FormGroup>
-
-                <Row className="button-row">
-                  <Col xs="6">
-                    <Button color="secondary" className="button">
-                      Previous
-                    </Button>
-                  </Col>
-                  <Col xs="6">
-                    <Button color="primary" className="button">
-                      Next
-                    </Button>
-                  </Col>
-                </Row>
+                <MapComponent
+                  onShopChange={(e) => setSelectShop({ name: e })}
+                />
               </Container>
             </CardBody>
           </Card>
@@ -59,7 +40,13 @@ const Address = () => {
         <Col md="6">
           <Card>
             <CardBody>
-              <OrderSummary />
+              <OrderSummary
+                showPrev={false}
+                showNext={Boolean(selectedShop?.name)}
+                onNextButtonClick={()=>{
+                  dispatch(alterReducer({selectedShopDetails:selectedShop}))
+                  onNextButtonClick()}}
+              />
             </CardBody>
           </Card>
         </Col>

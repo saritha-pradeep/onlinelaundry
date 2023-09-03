@@ -1,61 +1,69 @@
-// import React from 'react'
-// import { GoogleMap, StandaloneSearchBox, useJsApiLoader } from '@react-google-maps/api';
-
-import Section1 from "./Section1"
-import Address from "./address"
-
-// const containerStyle = {
-//   width: '400px',
-//   height: '400px'
-// };
-
-// const center = {
-//   lat: -3.745,
-//   lng: -38.523
-// };
-
-// function MyComponent() {
-//   const { isLoaded } = useJsApiLoader({
-//     id: 'google-map-script',
-//     googleMapsApiKey: "AIzaSyBMrwnte0uiVSPLfwcRMIyo-lV2oKQaWlA"
-//   })
-
-//   const [map, setMap] = React.useState(null)
-
-//   const onLoad = React.useCallback(function callback(map) {
-//     // This is just an example of getting and using the map instance!!! don't just blindly copy!
-//     const bounds = new window.google.maps.LatLngBounds(center);
-//     map.fitBounds(bounds);
-
-//     setMap(map)
-//   }, [])
-
-//   const onUnmount = React.useCallback(function callback(map) {
-//     setMap(null)
-//   }, [])
-
-//   return isLoaded ? (
-//       <GoogleMap
-//         mapContainerStyle={containerStyle}
-//         center={center}
-//         zoom={10}
-//         onLoad={onLoad}
-//         onUnmount={onUnmount}
-//       >
-//         { /* Child components, such as markers, info windows, etc. */ }
-//         <></>
-//       </GoogleMap>
-//   ) : <>
-//   <StandaloneSearchBox >
-//     <input/>
-//     </StandaloneSearchBox></>
-// }
-
-// export default React.memo(MyComponent)
-
+import React from "react";
+import Address from "./address";
+import BookingHeader from "./BookingHeader";
+import LaundryItems from "./LaundryItems";
+import CollectionAndDelivery from "./Collection";
+import "./styles.css";
+import { useDispatch, useSelector } from "react-redux";
+import { alterReducer, changeSection } from "./reducer";
+import ContactDetails from "./ContactDetails";
+import { Col, Container, Row, Spinner } from "reactstrap";
 function Booking(params) {
-    return(<div>
-        <Address/>
-    </div>)
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const currentIndex = state.bookingReducer.currentIndex;
+  const isLoading = state.bookingReducer.isLoading;
+  const compArray = [
+    Address,
+    LaundryItems,
+    CollectionAndDelivery,
+    ContactDetails,
+  ];
+  const handleNextButtonClick = (index) => {
+    if (index < compArray.length) {
+      dispatch(
+        alterReducer({
+          currentIndex: index + 1,
+          sections: state.bookingReducer.sections.map((e, i) => {
+            if (i === index) {
+              return { ...e, active: true };
+            }
+            return e;
+          }),
+        })
+      );
+    }
+  };
+  const handlePrevButtonClick = (index) => {
+    if (index !== 0) {
+      dispatch(alterReducer({ currentIndex: index - 1 }));
+    }
+  };
+  return (
+    <Container fluid>
+      <BookingHeader />
+      {isLoading ? (
+        <div className="loader-style-booking">
+          <Spinner children={false} className="spinner-style-booking" />
+        </div>
+      ) : null}
+      {compArray.map((Comp, index) => {
+        if (!isLoading)
+          return (
+            <div
+              className={`slide-card ${
+                currentIndex === index ? "visible" : ""
+              }`}
+            >
+              <Comp
+                onNextButtonClick={() => handleNextButtonClick(index)}
+                onPrevButtonClick={() => handlePrevButtonClick(index)}
+              />
+            </div>
+          );
+        else return null;
+      })}
+    </Container>
+  );
 }
-export default Booking
+export default Booking;
