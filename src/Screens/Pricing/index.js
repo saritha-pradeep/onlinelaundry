@@ -1,22 +1,19 @@
-// 
-import React from 'react';
-import ButtonWithIcon from '../../Components/ButtonWithIcon';
-import LaundryList from '../../Components/LaundryList';
+//
+import React from "react";
 import "./pricing.css";
+import { Container, Row } from "reactstrap";
+import LaundryItems from "../Booking/LaundryItems";
+import Header from "../../Components/Header";
 
-const App = () => {
+const Pricing = () => {
   return (
-    <div className="app">
-      <div className="buttons">
-        <ButtonWithIcon icon="🧺" label="Laundry" />
-        <ButtonWithIcon icon="👗" label="Dress" />
-        <ButtonWithIcon icon="🕴️" label="Suit" />
-        <ButtonWithIcon icon="👖" label="Trousers" />
-        <ButtonWithIcon icon="👔" label="Shirt" />
-      </div>
-      <LaundryList />
-    </div>
+    <Container fluid className="p-0">
+      <Header />
+      <Row style={{ marginTop: 30 }}>
+        <LaundryItems />
+      </Row>
+    </Container>
   );
 };
 
-export default App;
+export default Pricing;

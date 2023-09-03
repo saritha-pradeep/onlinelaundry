@@ -6,13 +6,15 @@ import {
 import { useEffect, useState } from "react";
 import "./styles.css";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
-import { useDispatch } from "react-redux";
-import { alterReducer, updateCart } from "../reducer";
+import { useDispatch, useSelector } from "react-redux";
+import {  updateCart } from "../reducer";
 export default function LaundryItems({
   onNextButtonClick = () => {},
   onPrevButtonClick = () => {},
 }) {
   const [laundryItems, setLaundryItems] = useState([]);
+  const state = useSelector((state) => state);
+  const isLoggedIn = state.loginReducer.isLoggedIn;
   const [laundryCategories, setlaundryCategories] = useState([]);
   const cartedItems = laundryItems.filter((e) => e.itemCount > 0);
   const dispatch = useDispatch();
@@ -171,7 +173,7 @@ export default function LaundryItems({
             </Row>
           </Col>
 
-          <Row style={{ marginTop: 30 }}>
+          {isLoggedIn&&<Row style={{ marginTop: 30 }}>
             <Col xs={cartedItems.length > 0 ? "6" : "12"}>
               <Button style={{ width: "100%" }} onClick={onPrevButtonClick}>
                 Previous
@@ -192,7 +194,7 @@ export default function LaundryItems({
                 </Button>
               </Col>
             )}
-          </Row>
+          </Row>}
         </Col>
       </Row>
     </Container>

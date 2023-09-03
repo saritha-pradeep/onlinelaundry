@@ -5,7 +5,7 @@ import LaundryItems from "./LaundryItems";
 import CollectionAndDelivery from "./Collection";
 import "./styles.css";
 import { useDispatch, useSelector } from "react-redux";
-import { alterReducer, changeSection } from "./reducer";
+import { alterReducer } from "./reducer";
 import ContactDetails from "./ContactDetails";
 import { Col, Container, Row, Spinner } from "reactstrap";
 function Booking(params) {

@@ -29,7 +29,7 @@ const Header2 = () => {
           <Link className='link_txt' to="/views">
             BOOKING
           </Link>
-          <Link className='link_txt' to="/about">
+          <Link className='link_txt' to="/pricing">
             PRICE
           </Link>
           <Link className='link_txt' to="/contact">

@@ -32,13 +32,13 @@ export default function ContactDetails({ show = false }) {
       })
     );
     const payload = {
-      userId: "",
+      userId: state.loginReducer.user.id,
       orderCreatedOn: new Date(),
       OrderStatus: "pending",
       orderedItems: state.bookingReducer.cart,
       userTimeSlots: state.bookingReducer.deliveryDetails,
       deliveryDetails: {},
-      contactInfo: state.bookingReducer.contactDetails,
+      contactInfo: _data,
       shopInfo: state.bookingReducer.selectedShopDetails,
     };
     addDoc(collection(db, "Orders"), payload)
@@ -51,7 +51,7 @@ export default function ContactDetails({ show = false }) {
             contactDetails: {},
             deliveryDetails: {},
             selectedShopDetails: {},
-            totalPrice:0
+            totalPrice: 0,
           })
         );
         navigate("/");
