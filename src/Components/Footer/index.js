@@ -50,7 +50,7 @@ const Footer = () => {
               <h4 className="quick__links-title">Useful Links</h4>
               <ListGroup>
                 <ListGroupItem className="ps-0 border-0">
-                  <Link to="/">About</Link>
+                  <Link to="/about">About</Link>
                 </ListGroupItem>
 
                 <ListGroupItem className="ps-0 border-0">

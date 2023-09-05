@@ -3,27 +3,36 @@ import "./styles.css";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { Col, Container, Row } from "reactstrap";
+
 function BookingHeader(params) {
-  const state=useSelector(state=>state)
-  const Sections=state.bookingReducer.sections
-  
+  const state = useSelector((state) => state);
+  const Sections = state.bookingReducer.sections;
+
   return (
     <Container fluid className="bh-main-container">
       <Row sm={12} className="align-items-center">
-   <Col sm={4}>
-      <img height='100' width='100' className="bk-logo" src='https://img.freepik.com/free-vector/laundry-logo-with-text-space-your-slogan_1447-1423.jpg?w=2000'/>
-      </Col>
-      <Col sm='8' >
-      <Row>
-          {Sections.map((item,index)=><Col key={index}>
-            <AiOutlineCheckCircle color={item.active?'green':'grey'} className='booking-h-icon-style'/>
-           {item.tabname}
-          </Col>
-          )}
-       
+        <Col sm={4}>
+          {/* <img height='100' width='100' className="bk-logo" src='https://img.freepik.com/free-vector/laundry-logo-with-text-space-your-slogan_1447-1423.jpg?w=2000'/> */}
+          <img
+            height="100"
+            width="100"
+            src={require("../../../assets/download-removebg-preview.png")}
+          />
+        </Col>
+        <Col sm="8">
+          <Row>
+            {Sections.map((item, index) => (
+              <Col key={index}>
+                <AiOutlineCheckCircle
+                  color={item.active ? "green" : "grey"}
+                  className="booking-h-icon-style"
+                />
+                {item.tabname}
+              </Col>
+            ))}
+          </Row>
+        </Col>
       </Row>
-      </Col>
-    </Row>
     </Container>
   );
 }

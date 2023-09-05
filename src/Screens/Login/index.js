@@ -25,7 +25,7 @@ const Login = () => {
        const currentUser=await getSingleDocument({query:_q})
         dispatch(alterReducer({ isLoggedIn: true, user:currentUser[0] }));
         toastController.success("Login Successfull");
-        navigate("/");
+        navigate("/dashboard");
       })
       .catch((error) => {
         toastController.error("Ooops an error occured!", error);
@@ -35,8 +35,8 @@ const Login = () => {
   return (
     <div>
       <Header2 />
-      <div className="signup-container">
-        <form className="signup-form" onSubmit={handleSubmit}>
+      <div className="login-container">
+        <form className="login-form" onSubmit={handleSubmit}>
           <h2>LOGIN</h2>
           <div className="form-field">
             <label>Email</label>

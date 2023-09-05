@@ -1,0 +1,29 @@
+.about-us-container {
+  /* height: 100vh; Set the container to full viewport height */
+
+}
+
+.about-us {
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 0 auto; 
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: antiquewhite;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+ 
+}
+.head{
+  text-align: center;
+  text-shadow: 2px 2px #6d6363;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Add responsive styles for mobile devices */
+@media (max-width: 768px) {
+  .about-us {
+    padding: 10px;
+  }
+}

@@ -22,17 +22,15 @@ const Header2 = () => {
             className='logo_img'
           />
           <ul className='mainMenu'>
-          <Link className='link_txt' to="/">
-            PRIME MEMBERSHIP
-          </Link>
           
-          <Link className='link_txt' to="/views">
+          
+          <Link className='link_txt' to="/booking">
             BOOKING
           </Link>
           <Link className='link_txt' to="/pricing">
             PRICE
           </Link>
-          <Link className='link_txt' to="/contact">
+          <Link className='link_txt' to="/about">
             ABOUT US
           </Link>
           <Link className='link_txt' to="/login">

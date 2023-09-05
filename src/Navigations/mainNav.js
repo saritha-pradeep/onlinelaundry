@@ -9,8 +9,10 @@ import Login from "../Screens/Login";
 import SignUp from "../Screens/SignUp";
 import Booking from "../Screens/Booking";
 import Pricing from "../Screens/Pricing";
-import Second from "../Screens/second";
-import DahsBoard from "../Screens/DashBoard";
+import DashBoard from "../Screens/DashBoard";
+import About from "../Screens/About";
+
+
 function MainNav(params) {
   return (
     <NavigationProvider>
@@ -20,8 +22,9 @@ function MainNav(params) {
       <Route path="/signup" element={<SignUp/>} />
       <Route path="/booking" element={<Booking/>} />
       <Route path="/pricing" element={<Pricing/>} />
-      <Route path="/second" element={<Second/>} />
-      <Route path="/dashboard" element={<DahsBoard/>} />
+      <Route path="/dashboard" element={<DashBoard/>} />
+      <Route path="/about" element={<About/>} />
+      
       </Routes>
     </NavigationProvider>
   );

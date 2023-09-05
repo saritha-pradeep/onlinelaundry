@@ -69,7 +69,7 @@ export default function Home(props) {
           
            <SliderSwipe/> 
         {/* pricing */}
-          <div >
+          <div className="price-section-main">
           <section class="price-section">
               <div class="price-item">
                 <h2>Shirt</h2>

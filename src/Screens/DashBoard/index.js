@@ -6,6 +6,7 @@ import { getSingleDocument } from "../../Firebase/functions";
 import { collection, query } from "firebase/firestore";
 import { db } from "../../Firebase/config";
 import { useSelector } from "react-redux";
+
 export default function DahsBoard() {
   const [orders, setOrders] = useState([]);
   const state = useSelector((state) => state);
@@ -29,6 +30,7 @@ export default function DahsBoard() {
   return (
     <Container fluid className="p-0">
       <Header />
+     
       <Row className="dash-outer-box-style">
         <Row className="dash-inner-box1-style">
           <Col sm="4" className="dash-box-styles">
