@@ -8,6 +8,7 @@ import { db } from "../../../Firebase/config";
 import { collection, query } from "firebase/firestore";
 import { useDispatch } from "react-redux";
 import { alterReducer, changeSection } from "../reducer";
+import { toastController } from "../../../Components/ToastWidget";
 const Address = ({ onNextButtonClick = () => {} }) => {
   const [selectedShop, setSelectShop] = useState({});
   const dispatch = useDispatch();
@@ -31,7 +32,10 @@ const Address = ({ onNextButtonClick = () => {} }) => {
                 <h4>Find your nearby laundry shops</h4>
                 <hr className="divider" />
                 <MapComponent
-                  onShopChange={(e) => setSelectShop({ name: e })}
+                  onShopChange={(e) =>{
+                    toastController.info(`You have selected ${e.name} shop, ${e.postcode}  `)
+                     setSelectShop({ name: e })
+                    }}
                 />
               </Container>
             </CardBody>
